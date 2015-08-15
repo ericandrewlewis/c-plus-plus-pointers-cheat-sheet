@@ -29,11 +29,16 @@ int main(int argc, const char * argv[]) {
 
     /*
      * This is synonymous with a pointer. A pointer is a memory address.
-     * We can create a pointer "variable" by defining it as such.
-     * This line says "create a pointer whose memory address points to an integer,
-     * and use the memory address of the "number" variable.
+     * Let's create a pointer.
      */
-    int *numberPointer = &number;
+    int *numberPointer;
+    // We've created a pointer that points nowhere.
+    std::cout << "The numberPointer points to the memory address " << numberPointer << "\n";
+
+    // We can set the memory address the pointer should point to.
+    numberPointer = &number;
+
+    std::cout << "The numberPointer points to the memory address `" << numberPointer << "`, which is the memory address of `number`\n";
 
     /*
      * With this pointer, the value of the referenced variable can be accessed with
