@@ -18,6 +18,7 @@
  */
 void setValueToFive(int x)
 {
+    std::cout << &x << "\n";
     x = 5;
 }
 
@@ -46,10 +47,10 @@ int main(int argc, const char * argv[]) {
      * When declaring a variable by identifier (or name),
      * the variable is synonymous with its value.
      * 
-     * If you program JavaScript or another modern language, this is our basic understanding of variables.
+     * If you're familiar with JavaScript or another modern programming language, this is how you understand variables.
      */
     int number = 3;
-    std::cout << "number is initialized at " << number << "\n";
+    std::cout << "number is initialized with a value of " << number << "\n";
 
     // The value of the variable can be modified directly.
     number++;
@@ -57,14 +58,14 @@ int main(int argc, const char * argv[]) {
     std::cout << "After modifying number, its value is now " << number << "\n";
 
     /* 
-     * Internally, this variables "lives" somewhere in memory, at a specific memory address.
+     * Internally, the variable lives in memory, at a specific memory address.
      *
-     * We can access the memory address through the "&" operator.
+     * We can access the memory address by using the "&" operator.
      */
     std::cout << "number's memory address is " << &number << "\n";
 
     /*
-     * A construct that holds a memory address is a pointer.
+     * A pointer is a variable that holds a memory address.
      *
      * A pointer is created using the "*" operator before an identifier. 
      *
@@ -72,37 +73,52 @@ int main(int argc, const char * argv[]) {
      * This is the type of data that will live at the memory address it points to.
      */
     int *numberPointer;
-
-    // This pointer has been initialized, but it points nowhere.
-    std::cout << "The numberPointer points to the memory address " << numberPointer << ", \n";
     
-    // We can set the memory address the pointer should point to.
+    // This pointer has been initialized, but it points nowhere. It has no memory address.
+    std::cout << "The numberPointer points to the memory address " << numberPointer << ".\n";
+    
+    // The pointer is a variable in itself, and all variables are stored somewhere in memory.
+    // We can see the memory address the pointer's memory address is stored.
+    std::cout << "The numberPointer's memory address is stored at " << &numberPointer << ".\n";
+    
+    // We can set the memory address the pointer should point to
+    // using the memory address of the `number` variable.
     numberPointer = &number;
-
     std::cout << "The numberPointer points to the memory address `" << numberPointer << "`, which is the memory address of number\n";
-    
+
     /*
      * With a pointer, the value at the memory address pointed to can be accessed with
-     * the deference operator, "*".
+     * the dereference operator, "*".
      */
     std::cout << "The variable's value pointed to by numberPointer is " << *numberPointer << "\n";
 
     // The value of the variable pointed to can be modified using this operator as well.
     *numberPointer = 4;
-    
     std::cout << "The variable's value has been modified using the pointer. The variable's value is now " << number << "\n";
+
+    /*
+     * One of the confusing parts about pointers is how asterisks are used. 
+     *
+     * We've shown that the asterisk operator (*) is used both 
+     * to declare a pointer variable (i.e. int *numberPointer) and
+     * to access the value a pointer points to (*numberPointer = 4).
+     *
+     * This can be confusing but just part of the syntax we need to internalize.
+     */
 
     // Why would you use pointers?
 
     /*
      * In C++, variables are passed to a function by value.
-     * A new variable is instantiated inside the function with the value passed to it.
      *
-     * Any modifications to the value inside the function are not performed against the
-     * variable where the function is invoked.
+     * When calling a function with an argument, a new variable is instantiated internally
+     * and assigned the value passed in the function call.
+     *
+     * Any modifications to the value inside the function are performed to
+     * this new variable; the variable that was invoked with the function call is unchanged.
      */
     int x = 3;
-    setValueToFive(x);
+    setValueToFive( x );
     std::cout << "The value of x is " << x << ", setValueToFive() did not modify x.\n";
 
     /*
@@ -110,8 +126,8 @@ int main(int argc, const char * argv[]) {
      *
      * This lowers the memory footprint of the program. Unnecessary duplicate variables aren't created.
      *
-     * The function can modify the variable's value directly. Any modifications to the variable in the function
-     * affect the variable here in this scope too.
+     * The function can modify the variable's value directly. 
+     * Any modifications to the variable in the function affect the vateriable here in this scope too.
      */
     setPointerValueToFive( &x );
     std::cout << "The value of x is " << x << ", setPointerValueToFive() modified x.\n";
